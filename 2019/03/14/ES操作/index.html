@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="flymoon">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="ES">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="flymoon">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="http://flymoon.top">
+  
+    <link rel="alternate" href="/atom.xml" title="flymoon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>flymoon</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">ES</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/<your-github-username>">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:<your-email-address>">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By flymoon</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-14</span>
+            <span class="time">14:43:00</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>[TOC]</p>
+<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><ul>
+<li>分布式 可扩展 实时的搜索引擎</li>
+<li>接近实时<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">* 支持多种客户端</span><br><span class="line">* 强大的统计功能</span><br><span class="line">* ```RESTful``` ```Api``` 接口</span><br><span class="line"></span><br><span class="line">## 2 使用场景</span><br><span class="line">* 全文检索</span><br><span class="line">* 结构化检索</span><br><span class="line">* 数据分析</span><br><span class="line">* ```NoSQL``` ```Json``` 文档数据库</span><br><span class="line">### 2.1 材料分析使用场景</span><br><span class="line">* 文档数据存储（存储文本的结构化数据）</span><br><span class="line">* 文本搜索（关键字搜索）</span><br><span class="line">* 数据统计（用户使用习惯统计）</span><br><span class="line"></span><br><span class="line">## 3 如何部署</span><br><span class="line">### 3.1 服务端</span><br><span class="line">支持linux和window平台部署</span><br><span class="line">* 硬件要求</span><br><span class="line">    &gt; 内存要求比较高，排序和聚合比较好内存</span><br><span class="line"></span><br><span class="line">    &gt; 硬盘尽可能快</span><br><span class="line"></span><br><span class="line">    &gt; cpu要求不高，核数多，支持的并发就多</span><br><span class="line">* 操作系统</span><br><span class="line">    &gt; 推荐部署在linux下。 （磁盘阵列）???</span><br><span class="line">* JDK</span><br><span class="line">    &gt; JDK 1.7 + </span><br><span class="line">* 部署配置说明</span><br><span class="line">    &gt; ```1.7.5``` 部署说明</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>cluster.name: clfx-test<br>配置es的集群名称，默认是elasticsearch，es会自动发现在同一网段下的es，如果在同一网段下有多个集群，就可以用这个属性来区分不同的集群。<br>node.name: “data-0”<br>节点名，默认随机指定一个name列表中名字，该列表在es的jar包中config文件夹里name.txt文件中，其中有很多作者添加的有趣名字。<br>node.master: true<br>指定该节点是否有资格被选举成为node，默认是true，es是默认集群中的第一台机器为master，如果这台机挂了就会重新选举master。<br>node.data: true<br>指定该节点是否存储索引数据，默认为true。<br>index.number_of_shards: 5<br>设置默认索引分片个数，默认为5片。<br>index.number_of_replicas: 1<br>设置默认索引副本个数，默认为1个副本。<br>path.conf: /path/to/conf<br>设置配置文件的存储路径，默认是es根目录下的config文件夹。<br>path.data: /path/to/data<br>设置索引数据的存储路径，默认是es根目录下的data文件夹，可以设置多个存储路径，用逗号隔开，例：<br>path.data: /path/to/data1,/path/to/data2<br>path.work: /path/to/work<br>设置临时文件的存储路径，默认是es根目录下的work文件夹。<br>path.logs: /path/to/logs<br>设置日志文件的存储路径，默认是es根目录下的logs文件夹<br>path.plugins: /path/to/plugins<br>设置插件的存放路径，默认是es根目录下的plugins文件夹<br>bootstrap.mlockall: true<br>设置为true来锁住内存。因为当jvm开始swapping时es的效率会降低，所以要保证它不swap，可以把ES_MIN_MEM和 ES_MAX_MEM两个环境变量设置成同一个值，并且保证机器有足够的内存分配给es。同时也要允许elasticsearch的进程可以锁住内存，linux下可以通过<code>ulimit -l unlimited</code>命令。<br>network.bind_host: 192.168.0.1<br>设置绑定的ip地址，可以是ipv4或ipv6的，默认为0.0.0.0。<br>network.publish_host: 192.168.0.1<br>设置其它节点和该节点交互的ip地址，如果不设置它会自动判断，值必须是个真实的ip地址。<br>network.host: 192.168.0.1<br>这个参数是用来同时设置bind_host和publish_host上面两个参数。<br>transport.tcp.port: 9300<br>设置节点间交互的tcp端口，默认是9300。<br>transport.tcp.compress: true<br>设置是否压缩tcp传输时的数据，默认为false，不压缩。<br>http.port: 9200<br>设置对外服务的http端口，默认为9200。<br>http.max_content_length: 100mb<br>设置内容的最大容量，默认100mb<br>http.enabled: false<br>是否使用http协议对外提供服务，默认为true，开启。<br>gateway.type: local<br>gateway的类型，默认为local即为本地文件系统，可以设置为本地文件系统，分布式文件系统，Hadoop的HDFS，和amazon的s3服务器。<br>gateway.recover_after_nodes: 1<br>设置集群中N个节点启动时进行数据恢复，默认为1。<br>gateway.recover_after_time: 5m<br>设置初始化数据恢复进程的超时时间，默认是5分钟。<br>gateway.expected_nodes: 2<br>设置这个集群中节点的数量，默认为2，一旦这N个节点启动，就会立即进行数据恢复。<br>cluster.routing.allocation.node_initial_primaries_recoveries: 4<br>初始化数据恢复时，并发恢复线程的个数，默认为4。<br>cluster.routing.allocation.node_concurrent_recoveries: 2<br>添加删除节点或负载均衡时并发恢复线程的个数，默认为4。<br>indices.recovery.max_size_per_sec: 0<br>设置数据恢复时限制的带宽，如入100mb，默认为0，即无限制。<br>indices.recovery.concurrent_streams: 5<br>设置这个参数来限制从其它分片恢复数据时最大同时打开并发流的个数，默认为5。<br>discovery.zen.minimum_master_nodes: 1<br>设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）<br>discovery.zen.ping.timeout: 3s<br>设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。<br>discovery.zen.ping.multicast.enabled: false<br>设置是否打开多播发现节点，默认是true。<br>discovery.zen.ping.unicast.hosts: [“host1”, “host2:port”, “host3[portX-portY]”]<br>设置集群中master节点的初始列表，可以通过这些节点来自动发现新加入集群的节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* 分词插件</span><br><span class="line">    &gt; IK分词</span><br><span class="line"></span><br><span class="line">```http://172.16.33.29:9201/_analyze?text=%E6%9D%90%E6%96%99%E5%88%86%E6%9E%90</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-客户端"><a href="#3-2-客户端" class="headerlink" title="3.2 客户端"></a>3.2 客户端</h3><p>客户端采用1.7.5</p>
+<ul>
+<li><p>Java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Settings settings = ImmutableSettings.settingsBuilder()</span><br><span class="line">        .put(&quot;cluster.name&quot;, clusterName)</span><br><span class="line">        .put(&quot;client.transport.sniff&quot;, true).build();</span><br><span class="line">Esclient esClient = new TransportClient(settings)</span><br><span class="line">        .addTransportAddress(new InetSocketTransportAddress(ip,</span><br><span class="line">                port));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTP</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PUT /megacorp/employee/1</span><br><span class="line">&#123;</span><br><span class="line">    &quot;first_name&quot; : &quot;John&quot;,</span><br><span class="line">    &quot;last_name&quot; :  &quot;Smith&quot;,</span><br><span class="line">    &quot;age&quot; :        25,</span><br><span class="line">    &quot;about&quot; :      &quot;I love to go rock climbing&quot;,</span><br><span class="line">    &quot;interests&quot;: [ &quot;sports&quot;, &quot;music&quot; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-存储结构"><a href="#4-存储结构" class="headerlink" title="4 存储结构"></a>4 存储结构</h2><h3 id="4-1-document"><a href="#4-1-document" class="headerlink" title="4.1 document"></a>4.1 document</h3><ul>
+<li>文档<blockquote>
+<p>一个文档是可以被索引的最基本的单位。<br>文档相当于关系型数据库中的row，也就是一行行的数据。<br>例如一个用户可以是一个文档，一个产品可以是一个文档，一条订单记录可以是一个文档。一般用作json格式来展示。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-2-index"><a href="#4-2-index" class="headerlink" title="4.2 index"></a>4.2 index</h3><ul>
+<li>索引<blockquote>
+<p>index 是一些列具有相同特性的文档的集合。类似于关系型数据库中的库。<br>举例说明，你可以为客户数据创建索引，可以为产品目录创建索引，也可以为其他任何数据创建索引。<br>需要注意的是，index name 必须为小写字母 ，通常索引的名称会用在索引数据，搜索，更新或者删除数据的地方。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-3-type"><a href="#4-3-type" class="headerlink" title="4.3 type"></a>4.3 type</h3><ul>
+<li>类型<blockquote>
+<p>在一个索引中，你可以定义多个 type ，type 是索引中的逻辑分类。当然这个type的意义完全取决于你。<br>type 相当于关系型数据数据库中的表。<br>举例来说，在一个博客系统中，你可以定义一个 user type,可以定义一个 blog type,还可以定义一个 comment type。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-4-Cluser"><a href="#4-4-Cluser" class="headerlink" title="4.4 Cluser"></a>4.4 Cluser</h3><ul>
+<li>聚集<blockquote>
+<p>cluser 也称聚集，是由一个或者多个 node 组成的集合，保存了你所有的数据并且为所有节点提供索引及搜索的能力。cluser 的名称唯一。在聚集中，你可以有一个或者多个 node</p>
+</blockquote>
+<h3 id="4-5-Node"><a href="#4-5-Node" class="headerlink" title="4.5 Node"></a>4.5 Node</h3></li>
+<li>节点<blockquote>
+<p>一个 node 是一个单个服务器，属于 cluser 的一部分，提供了索引及搜索的能力。和 cluser 一样, node 也是通过名字来确保唯一性的。当 node 启动时，会生成一个随机的字符作为 node 的名字。<br>node 可以通过配置进而加入到特定的 cluser 中。默认的话会被加入到 elasticsearch 这个 cluster。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-6-Shards"><a href="#4-6-Shards" class="headerlink" title="4.6 Shards"></a>4.6 Shards</h3><ul>
+<li><p>碎片</p>
+<blockquote>
+<p>一个索引可能会存储大量的数据，进而会让单个节点超出硬件能承受范围。举例来说，存储了10亿文档的单个节点，会占用1TB磁盘空间，并且会导致查询的时候速度很慢。<br>为了解决这个问题，Elasticsearch 提供了 碎片 也就是 shards 对 index 进行划分成更小的部分。 当你创建 index 的时候，你可以简单地指定你想要的碎片数量。每一个碎片具有和 index 完全相同的功能。</p>
+</blockquote>
+<p>  碎片最主要的两个作用是：</p>
+<blockquote>
+<p>它允许你水平地切割你的容量体积，它允许你并行地分发作业，提高系统的性能</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-7-Replicas"><a href="#4-7-Replicas" class="headerlink" title="4.7 Replicas"></a>4.7 Replicas</h3><ul>
+<li><p>副本</p>
+<blockquote>
+<p>因为各种原因，所以数据丢失等问题会时有发生，碎片也可能会丢失，为了防止这个问题，所以你可以将一个或多个索引碎片复制到所谓的复制碎片，简称为副本</p>
+</blockquote>
+<p>  副本最主要的两个作用是：</p>
+<blockquote>
+<p>它提供了高可用性,以防碎片/节点失败。之于这点，所以副本的永远不要和原始碎片分布在同一个节点上。<br>它可以扩展系统的吞吐量，因为搜索可以在所有副本执行。=<br>总的来说，每个 index 可以被分布到不同的碎片中，节点 可以有0个或者多个副本。一旦复制了，那么 index 就拥有一个主要的碎片和一个复制的碎片。碎片的数量和副本的数量可以在创建索引之前定义，在索引创建之后，你可以动态地改变副本的数量，但是却不能改变碎片的数量。<br>默认情况下，Elasticsearch 为每个索引分配了5个主碎片和1个副本，这意味着在你的集群中，如果至少有两个节点，那么每个索引将有5个主碎片和5个复制碎片，总共10碎片/索引。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="5-API"><a href="#5-API" class="headerlink" title="5 API"></a>5 API</h2><h3 id="5-1-增"><a href="#5-1-增" class="headerlink" title="5.1 增"></a>5.1 增</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">JSONObject json = new JSONObject();</span><br><span class="line">json.put(&quot;name&quot;, &quot;张三2222&quot;);</span><br><span class="line">json.put(&quot;sex&quot;, &quot;男&quot;);</span><br><span class="line">json.put(&quot;age&quot;, &quot;25&quot;);</span><br><span class="line">instance.getElasticWriter().index(&quot;lixiangyangtest&quot;, &quot;qaht_type_wsinfo&quot;, &quot;1113333333333333&quot;, json.toJSONString(), true);</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-删"><a href="#5-2-删" class="headerlink" title="5.2 删"></a>5.2 删</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">esInstance.getElasticWriter().delete(&quot;qaht_index_backfill&quot;, &quot;clfx_qaht_type_backfill_field&quot;,</span><br><span class="line">    hit.getId());</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-改"><a href="#5-3-改" class="headerlink" title="5.3 改"></a>5.3 改</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查完在存储</span><br></pre></td></tr></table></figure>
+<h3 id="5-4-查"><a href="#5-4-查" class="headerlink" title="5.4 查"></a>5.4 查</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GetResponse response = esinstace.getElasticReader().searchByID(index, wstype, cBh);</span><br><span class="line">String jsonStr = response.getSourceAsString();</span><br></pre></td></tr></table></figure>
+<h2 id="6-开发建议"><a href="#6-开发建议" class="headerlink" title="6 开发建议"></a>6 开发建议</h2><h3 id="6-1-索引"><a href="#6-1-索引" class="headerlink" title="6.1 索引"></a>6.1 索引</h3><ul>
+<li>功能描述_index_v版本号</li>
+<li>所有索引必须要创建别名，创建别名之后不能修改</li>
+<li>时间类型用long类型的存储</li>
+<li>最好index里面只创建一个type</li>
+<li>创建索引时，必须要创建mapping，指定好每一个字段的属性</li>
+</ul>
+<h3 id="6-2-搜索Api"><a href="#6-2-搜索Api" class="headerlink" title="6.2 搜索Api"></a>6.2 搜索Api</h3><ul>
+<li>org.elasticsearch.index.query.QueryBuilders.termQuery(String, String)</li>
+</ul>
+<p>term是代表完全匹配，即不进行分词器分析，文档中必须包含整个搜索的词汇，但是ES存储field的分词属性不能设置</p>
+<ul>
+<li>matchPhraseQuery<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_phrase&quot;: &#123;</span><br><span class="line">        &quot;content&quot; : &#123;</span><br><span class="line">            &quot;query&quot; : &quot;我的宝马多少马力&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>完全匹配</p>
+<ul>
+<li>matchQuery<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">        &quot;content&quot; : &#123;</span><br><span class="line">            &quot;query&quot; : &quot;我的宝马多少马力&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的查询匹配就会进行分词，比如”宝马多少马力”会被分词为”宝马 多少 马力”, 所有有关”宝马 多少 马力”, 那么所有包含这三个词中的一个或多个的文档就会被搜索出来。</p>
+<ul>
+<li><p>boolQuery</p>
+<blockquote>
+<p>must 相当于SQl里面的AND </p>
+</blockquote>
+<blockquote>
+<p>should 相当于SQL里面的OR</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="7-问题"><a href="#7-问题" class="headerlink" title="7 问题"></a>7 问题</h2><ul>
+<li><p>重迁索引</p>
+<blockquote>
+</blockquote>
+</li>
+<li><p>分布式事务</p>
+<blockquote>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/concurrency-solutions.html" target="_blank" rel="noopener">对单个文件的变更是可以支持事务的</a></p>
+</blockquote>
+<blockquote>
+<p>但是包含多个文档的变更不支持</p>
+</blockquote>
+</li>
+<li><p>版本升级</p>
+<blockquote>
+<p>进行数据迁移，数据量大怎么迁移</p>
+</blockquote>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        </p><p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+

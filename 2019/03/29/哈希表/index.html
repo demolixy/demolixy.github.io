@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="flymoon">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="springboot获取不到配置">
+  <meta property="og:title" content="哈希表">
   <meta property="og:description" content="">
   <meta property="og:site_name" content="flymoon">
   <meta property="og:type" content="article">
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">springboot获取不到配置</p>
+          <p class="title">哈希表</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -99,7 +99,7 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2019-03-20</span>
+            <span class="date">2019-03-29</span>
             <span class="time">01:35:23</span>
           </span>
           
@@ -108,64 +108,8 @@
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><ul>
-<li>使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* 使用的代码从网上找的，大家都是这样写的，无任何特殊的配置</span><br><span class="line"></span><br><span class="line">### 源码示例</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>es:<br>  ip: 172.16.33.29<br>  port: 9201<br>  username: admin<br>  password: 123<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<pre><code>@Value(&quot;${es.ip}&quot;)
-private String esIp;
-
-@Value(&quot;${es.port}&quot;)
-private String esHttpPort;
-
-@Value(&quot;${es.username}&quot;)
-private String esUserName;
-
-@Value(&quot;$(es.password)&quot;)
-private String esUserPw;
-
-/** jestClient 实例化对象 */
-private JestClient jestClient;
-
-public EsInstance() {
-    initJestClient();
-}
-
-/**
- * 初始化ES
- */
-private void initJestClient() {
-    String url = &quot;http://&quot; + esIp + &quot;:&quot; + esHttpPort;
-    HttpClientConfig httpClientConfig = new HttpClientConfig.Builder(url)
-            .defaultCredentials(esUserName, esUserPw)
-            .build();
-    CredentialsProvider credentialsProvider = httpClientConfig.getCredentialsProvider();
-    HttpClientContext httpClientContextTemplate = HttpClientContext.create();
-    httpClientContextTemplate.setCredentialsProvider(credentialsProvider);
-    JestHttpClient clientWithMockedHttpClient;
-    JestClientFactory factory = new JestClientFactory();
-    factory.setHttpClientConfig(httpClientConfig);
-    clientWithMockedHttpClient = (JestHttpClient) factory.getObject();
-    jestClient = clientWithMockedHttpClient;
-}
-</code></pre><p><code>`</code></p>
-<ul>
-<li>此处获取的相关属性都是空的</li>
-</ul>
-<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><ul>
-<li>Spring在扫描注解的时候，当扫描到会进行new对象的操作，因为此类里面有默认无参构造器，所以会直接初始化<code>initJestClient</code>方法，但是此时属性注解还是没有注入进去，所以获取的值就是空的！！！</li>
-</ul>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
-<li>当执行完Spring对象初始化的时候，才走这个初始化的方法</li>
-</ul>
-<h3 id="问题反思"><a href="#问题反思" class="headerlink" title="问题反思"></a>问题反思</h3><ul>
-<li>原来那样写，是因为使用的是工具类获取，工具类已经缓存到所有的属性，在bean初始化之前就已经缓存好了</li>
-</ul>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><ul>
-<li><p>Spring Bean的生命周期</p>
-<p><img src="https://note.youdao.com/yws/public/resource/7fc235c525305c0a08973cbf52212bc5/xmlnote/7C755F1ACCFE4BBC9E511AB294ECBB92/6879" alt="image"></p>
-</li>
-</ul>
+          <p>根据键<code>key</code>而直接访问内存存储位置的数据结构，它通过计算一个关于键值的函数，将所需要查询的数据映射到表中一个位置来访问记录。可以加快查找的速度。这个映射函数称做散列函数，存放记录的数组称做散列表</p>
+<p>###1. 基本概念</p>
 
         </div>
       </div>

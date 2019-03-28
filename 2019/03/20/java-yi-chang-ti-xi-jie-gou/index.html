@@ -8,10 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="flymoon">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="flymoon">
+  <meta property="og:title" content="Java异常体系结构">
   <meta property="og:description" content="">
   <meta property="og:site_name" content="flymoon">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
   <meta property="og:image" content="http://flymoon.top">
   
     <link rel="alternate" href="/atom.xml" title="flymoon" type="application/atom+xml">
@@ -35,8 +35,7 @@
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
   <body>
-    <!-- Archive Header -->
-<!-- Page Header -->
+    <!-- Page Header -->
 
 
 <header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
@@ -44,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">Blog Archives</p>
+          <p class="title">Java异常体系结构</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -89,90 +88,48 @@
   </div>
 </header>
 
-<!-- Archive List -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      
-        <div class="archive-item">
-  <a href="/2019/03/29/ha-xi-biao/" class="post-title">
-    哈希表
-  </a>
-  <div class="date text-muted">Posted on 2019-03-29 01:33:48</div>
-</div>
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By flymoon</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-03-20</span>
+            <span class="time">02:02:03</span>
+          </span>
+          
+        </div>
+        <!-- Tags -->
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h3 id="Java异常体系结构"><a href="#Java异常体系结构" class="headerlink" title="Java异常体系结构"></a>Java异常体系结构</h3><p><img src="https://note.youdao.com/yws/public/resource/7fc235c525305c0a08973cbf52212bc5/xmlnote/F8F814C1853543ECB84F66407E511C99/7121" alt="image"></p>
+<h4 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h4><p>Thorwable类所有异常和错误的超类，有两个子类Error和Exception，分别表示错误和异常</p>
+<h4 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h4><p>程序本身可以处理的异常，这种异常分两大类运行时异常和非运行时异常。<br>    程序中应当尽可能去处理这些异常。</p>
+<ul>
+<li><p>运行时异常</p>
+<blockquote>
+<p>运行时异常都是RuntimeException类及其子类异常，如NullPointerException、IndexOutOfBoundsException等，<br>这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。这些异常一般是由程序逻辑错误引起的，<br>程序应该从逻辑角度尽可能避免这类异常的发生。</p>
+</blockquote>
+</li>
+<li><p>非运行时异常</p>
+<blockquote>
+<p>非运行时异常是RuntimeException以外的异常，类型上都属于Exception类及其子类。<br>从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过。<br>如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h4><p>Error是程序无法处理的错误，比如OutOfMemoryError、ThreadDeath等。这些异常发生时，<br>    Java虚拟机（JVM）一般会选择线程终止。</p>
 
-      
-        <div class="archive-item">
-  <a href="/2019/03/20/xiang-xia-zhuan-xing-he-zi-dong-bao-zhuang/" class="post-title">
-    向下转型和自动包装
-  </a>
-  <div class="date text-muted">Posted on 2019-03-20 17:11:33</div>
-</div>
-
-      
-        <div class="archive-item">
-  <a href="/2019/03/20/java-yi-chang-ti-xi-jie-gou/" class="post-title">
-    Java异常体系结构
-  </a>
-  <div class="date text-muted">Posted on 2019-03-20 16:40:11</div>
-</div>
-
-      
-        <div class="archive-item">
-  <a href="/2019/03/20/springboot-huo-qu-bu-dao-pei-zhi/" class="post-title">
-    springboot获取不到配置
-  </a>
-  <div class="date text-muted">Posted on 2019-03-20 16:37:59</div>
-</div>
-
-      
-        <div class="archive-item">
-  <a href="/2019/03/14/maven-scope-de-ji-chong-lei-xing/" class="post-title">
-    Maven scope的几种类型
-  </a>
-  <div class="date text-muted">Posted on 2019-03-14 14:50:21</div>
-</div>
-
-      
-        <div class="archive-item">
-  <a href="/2019/03/14/java-list-zhong-de-clear-he-removeall-xing-neng-bi-jiao/" class="post-title">
-    Java List中的clear 和 removeAll性能比较
-  </a>
-  <div class="date text-muted">Posted on 2019-03-14 14:48:25</div>
-</div>
-
-      
-        <div class="archive-item">
-  <a href="/2019/03/14/xian-cheng-chi/" class="post-title">
-    线程池
-  </a>
-  <div class="date text-muted">Posted on 2019-03-14 14:41:09</div>
-</div>
-
-      
-        <div class="archive-item">
-  <a href="/2019/03/14/es-cao-zuo/" class="post-title">
-    ES
-  </a>
-  <div class="date text-muted">Posted on 2019-03-14 14:39:38</div>
-</div>
-
-      
-
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<!-- Pagination -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 col-md-offset-1">
-      <ul class="pagination">
-          
-          
-      </ul>
-    </div>
-  </div>
-</div>
+</article>
 
 
 

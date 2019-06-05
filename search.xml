@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>日期格式化（YYYY/MM/dd）</title>
+      <link href="/2019/06/05/ri-qi-ge-shi-hua/"/>
+      <url>/2019/06/05/ri-qi-ge-shi-hua/</url>
+      
+        <content type="html"><![CDATA[<p>日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：</p><ul><li>表示月份是大写的M；</li><li>表示分钟则是小写的m；</li><li>24小时制的是大写的H；</li><li>12小时制的则是小写的h。</li></ul><p>正例：表示日期和时间的格式如下所示：<br> new SimpleDateFormat(“yyyy-MM-dd HH:mm:ss”);</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2019/05/10/wei-ming-ming/"/>
+      <url>/2019/05/10/wei-ming-ming/</url>
+      
+        <content type="html"><![CDATA[<table><thead><tr><th></th><th>名称</th><th>wiki</th></tr></thead><tbody><tr><td>服务框架</td><td>HSF</td><td><a href="http://mw.alibaba-inc.com/products/hsf/_book/?spm=a1zco.detail-hsf.2853836.3.1c7c4ef0ZdudL9" target="_blank" rel="noopener">wiki</a></td></tr><tr><td>应用框架</td><td>Pandora Boot</td><td><a href="http://mw.alibaba-inc.com/products/pandoraboot/_book/?spm=a1zco.detail-pandoraboot.2853836.2.cced41aduAjVNm" target="_blank" rel="noopener">wiki</a></td></tr></tbody></table>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>TraceId 生成规则</title>
       <link href="/2019/05/09/traceid-sheng-cheng-gui-ze/"/>
       <url>/2019/05/09/traceid-sheng-cheng-gui-ze/</url>

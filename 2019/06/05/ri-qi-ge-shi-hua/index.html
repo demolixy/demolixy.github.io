@@ -4,11 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="TraceId 生成规则, flymoon">
-    <meta name="description" content="[TOC]
-1. 背景介绍在常用的日志系统中，都会生成一个唯一的标识，来标明本次请求的ID，所有具有一个实际业务含义的标识比UUID更加的具有可读性。
-2. 实现说明aaaaaaaatttttttttttttccccfpppp
-TraceI">
+    <meta name="keywords" content="日期格式化（YYYY/MM/dd）, flymoon">
+    <meta name="description" content="日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：
+
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +15,7 @@ TraceI">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>TraceId 生成规则 | flymoon</title>
+    <title>日期格式化（YYYY/MM/dd） | flymoon</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +259,13 @@ TraceI">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        TraceId 生成规则
+                        日期格式化（YYYY/MM/dd）
                     </div>
                 </div>
             </div>
@@ -388,7 +387,7 @@ TraceI">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-05-09
+                    2019-06-05
                 </div>
 
                 
@@ -404,10 +403,14 @@ TraceI">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>[TOC]</p>
-<h3 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1. 背景介绍"></a>1. 背景介绍</h3><p>在常用的日志系统中，都会生成一个唯一的标识，来标明本次请求的ID，所有具有一个实际业务含义的标识比UUID更加的具有可读性。</p>
-<h3 id="2-实现说明"><a href="#2-实现说明" class="headerlink" title="2. 实现说明"></a>2. 实现说明</h3><p><strong><em>aaaaaaaatttttttttttttccccfpppp</em></strong></p>
-<p>TraceId的a段是8个字符的IP地址（IPv4的每个段用两位16进制数表示），t段是13个字符的生成TraceId的毫秒时间，c段是4位（1000-9999）的整数递增量。对于线上环境，a段IP地址使用的最前端负责生成TraceId的那台服务器的IP，使用a、t、c三段能从TraceId直接得到机器IP和生成时间，能够满足直接根据机器IP 扫描检索TraceId的需求；时间也有助于TraceId的分布足够分散的同时又可以按时间进行存储分区。c段的4位顺序数用于避免多线程并发时TraceId碰撞（可以保证在qps=9000000以下不碰撞）。a、t、c三段的TraceId是现在用的最多的方案，但这个方案并不完美，如果同一台机器上同时部署多个应用，就很容易出现TraceId碰撞的情况，为了支持多JVM实例环境，最新版的 TraceId 末尾又增加了一个扩展字符 f （一般用于排查问题，例如f 段是字符e，表示由nginx模块生成的TraceId）和进程号p段（用四位16进制数表示）。</p>
+                <p>日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：</p>
+<ul>
+<li>表示月份是大写的M；</li>
+<li>表示分钟则是小写的m；</li>
+<li>24小时制的是大写的H；</li>
+<li>12小时制的则是小写的h。</li>
+</ul>
+<p>正例：表示日期和时间的格式如下所示：<br> new SimpleDateFormat(“yyyy-MM-dd HH:mm:ss”);</p>
 
             </div>
             <hr>
@@ -555,7 +558,7 @@ TraceI">
                     </span>
                     <a href="http://flymoon.top" class="b-link-green">flymoon</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/05/09/traceid-sheng-cheng-gui-ze/" class="b-link-green">TraceId 生成规则</a>
+                    <a href="/2019/06/05/ri-qi-ge-shi-hua/" class="b-link-green">日期格式化（YYYY/MM/dd）</a>
                 </p>
             </div>
         </div>
@@ -578,7 +581,44 @@ TraceI">
         
         <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/06/05/ri-qi-ge-shi-hua/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="日期格式化（YYYY/MM/dd）">
+                        
+                        <span class="card-title">日期格式化（YYYY/MM/dd）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：
+
+</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            flymoon
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2019/05/10/wei-ming-ming/">
                     <div class="card-image">
@@ -613,43 +653,8 @@ wiki
 
 </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-10
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-user fa-fw"></i>
-                            flymoon
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/03/29/ha-xi-biao/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="哈希表">
-                        
-                        <span class="card-title">哈希表</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">根据键key而直接访问内存存储位置的数据结构，它通过计算一个关于键值的函数，将所需要查询的数据映射到表中一个位置来访问记录。可以加快查找的速度。这个映射函数称做散列函数，存放记录的数组称做散列表
-1.基本概念2.构造散列函数· 直接地址法
-</div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-29
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-10
                             </span>
                         <span class="publish-author">
                             

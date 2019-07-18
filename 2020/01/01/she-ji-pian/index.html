@@ -4,9 +4,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="对象拷贝, flymoon">
-    <meta name="description" content="[TOC]
-1. 拷贝方式1.1 深拷贝1.2 浅拷贝2. 代码示例2.1 common.io.BeanUtis2.2 org.springframework.beans.BeanUtils2.3 Cglib BeanCopier3. 性能">
+    <meta name="keywords" content="软件设计, flymoon">
+    <meta name="description" content="设计是把一种设想通过合理的规划，周密的计划，通过各种感觉形式传达出来的过程。设计是将目标更好变现的过程。回到软件设计上来，就体现在如何将软件高度抽象，解耦以达到分而治之的过程。
+设计是如此重要，我们既要具备对事物的抽象，解耦能力，又要能够从">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>对象拷贝 | flymoon</title>
+    <title>软件设计 | flymoon</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -258,13 +258,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        对象拷贝
+                        软件设计
                     </div>
                 </div>
             </div>
@@ -373,9 +373,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/设计/" target="_blank">
+                                <span class="chip bg-color">设计</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -386,7 +390,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-06-19
+                    2020-01-01
                 </div>
 
                 
@@ -402,8 +406,21 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>[TOC]</p>
-<h3 id="1-拷贝方式"><a href="#1-拷贝方式" class="headerlink" title="1. 拷贝方式"></a>1. 拷贝方式</h3><h4 id="1-1-深拷贝"><a href="#1-1-深拷贝" class="headerlink" title="1.1 深拷贝"></a>1.1 深拷贝</h4><h4 id="1-2-浅拷贝"><a href="#1-2-浅拷贝" class="headerlink" title="1.2 浅拷贝"></a>1.2 浅拷贝</h4><h3 id="2-代码示例"><a href="#2-代码示例" class="headerlink" title="2. 代码示例"></a>2. 代码示例</h3><h4 id="2-1-common-io-BeanUtis"><a href="#2-1-common-io-BeanUtis" class="headerlink" title="2.1 common.io.BeanUtis"></a>2.1 <code>common.io.BeanUtis</code></h4><h4 id="2-2-org-springframework-beans-BeanUtils"><a href="#2-2-org-springframework-beans-BeanUtils" class="headerlink" title="2.2 org.springframework.beans.BeanUtils"></a>2.2 <code>org.springframework.beans.BeanUtils</code></h4><h4 id="2-3-Cglib-BeanCopier"><a href="#2-3-Cglib-BeanCopier" class="headerlink" title="2.3 Cglib BeanCopier"></a>2.3 <code>Cglib BeanCopier</code></h4><h3 id="3-性能分析"><a href="#3-性能分析" class="headerlink" title="3. 性能分析"></a>3. 性能分析</h3><h3 id="4-结论"><a href="#4-结论" class="headerlink" title="4. 结论"></a>4. 结论</h3>
+                <p>设计是把一种设想通过合理的规划，周密的计划，通过各种感觉形式传达出来的过程。设计是将目标更好变现的过程。回到软件设计上来，就体现在如何将软件高度抽象，解耦以达到分而治之的过程。</p>
+<p>设计是如此重要，我们既要具备对<strong>事物的抽象</strong>，<strong>解耦能力</strong>，又要能够从细节上作把控，做到大处着眼，小处着手。</p>
+<p>对于方法论，软件设计领域也诞生了很多软件设计思想，比如<code>面向过程设计</code>，<code>面向对象设计</code>，<code>面向服务设计</code>，<code>面向消息设计</code>，<code>面向失败设计等</code>，每种思想也都是在企业软件发展不同阶段解决某个领域或某一类的问题，没有好与坏的区别。</p>
+<p>任何一点点的故障都可能带来严重的后果，因此面向失败设计显得尤为重要。我们需要横向从网络，dns，cdn，软负载，中间件，容器，存储，数据库等维度去梳理沉淀经验，也需要从纵向运维发布，监控报警，管控平台，调度，环境部署等维度梳理。 以下常用的参考指标：</p>
+<ol>
+<li>编码设计 模块，服务，字段等设计的时候，需要考虑命名的可读性，见名知意，避免产生歧义。 接口设计需要满足开闭原则。</li>
+<li>分布式设计 需要考虑一致性，避免脑裂问题产生。</li>
+<li>缓存设计 确定命中率指标的前提下，需要持续观察未命中数据特征，特别是无效的查询，容易穿透缓存，命中数据库。</li>
+<li>容量设计 自身稳态及尖刺容量评估确定的前提下，做好容量保护相应措施，比如限流，降级，隔离等</li>
+<li>依赖设计 做好强弱依赖梳理，避免核心功能依赖非核心系统，非核心流程节点，能走异步最好走异步。</li>
+<li>日志设计 系统日志尽可能异步化，尽量避免无效日志，控制台日志输出</li>
+<li>监控设计 关键监控项及SLA的指标必须要做监控，监控项尽可能覆盖全，同时要做到有效报警，不要让大量无效报警淹没有价值的报警信息。</li>
+<li>权限设计 本着够用原则，避免出现大权限，大账号，如果避免不了，需要做天花板限制。<br>表结构设计 分库分表需要考虑热点数据问题，时刻关注表的数据量大小</li>
+</ol>
+
             </div>
             <hr>
 
@@ -550,7 +567,7 @@
                     </span>
                     <a href="http://flymoon.top" class="b-link-green">flymoon</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/06/19/dui-xiang-kao-bei/" class="b-link-green">对象拷贝</a>
+                    <a href="/2020/01/01/she-ji-pian/" class="b-link-green">软件设计</a>
                 </p>
             </div>
         </div>
@@ -575,20 +592,22 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/07/12/readme/">
+                <a href="/2020/01/01/huan-cun-pian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="缓存设计">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">缓存设计</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary block-with-text">mdrecord</div>
+                    <div class="summary block-with-text">缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，
+
+比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-12
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-01
                         </span>
                         <span class="publish-author">
                             
@@ -597,6 +616,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/设计/" target="_blank">
+                        <span class="chip bg-color">设计</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -608,22 +635,22 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/06/05/ri-qi-ge-shi-hua/">
+                <a href="/2020/01/01/rong-yu-bei-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="日期格式化（YYYY/MM/dd）">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="MAVEN 操作相关">
                         
-                        <span class="card-title">日期格式化（YYYY/MM/dd）</span>
+                        <span class="card-title">MAVEN 操作相关</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary block-with-text">日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：
-
-</div>
+                    <div class="summary block-with-text">设计篇-冗余备份
+工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。
+比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-05
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-01
                             </span>
                         <span class="publish-author">
                             
@@ -632,6 +659,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/设计/" target="_blank">
+                        <span class="chip bg-color">设计</span>
+                    </a>
+                    
                 </div>
                 
             </div>

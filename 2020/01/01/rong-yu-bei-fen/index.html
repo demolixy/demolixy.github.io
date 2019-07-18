@@ -4,9 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="对象拷贝, flymoon">
-    <meta name="description" content="[TOC]
-1. 拷贝方式1.1 深拷贝1.2 浅拷贝2. 代码示例2.1 common.io.BeanUtis2.2 org.springframework.beans.BeanUtils2.3 Cglib BeanCopier3. 性能">
+    <meta name="keywords" content="MAVEN 操作相关, flymoon">
+    <meta name="description" content="设计篇-冗余备份
+工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。
+比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>对象拷贝 | flymoon</title>
+    <title>MAVEN 操作相关 | flymoon</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -258,13 +259,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        对象拷贝
+                        MAVEN 操作相关
                     </div>
                 </div>
             </div>
@@ -373,9 +374,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/设计/" target="_blank">
+                                <span class="chip bg-color">设计</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -386,7 +391,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-06-19
+                    2020-01-01
                 </div>
 
                 
@@ -402,8 +407,13 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>[TOC]</p>
-<h3 id="1-拷贝方式"><a href="#1-拷贝方式" class="headerlink" title="1. 拷贝方式"></a>1. 拷贝方式</h3><h4 id="1-1-深拷贝"><a href="#1-1-深拷贝" class="headerlink" title="1.1 深拷贝"></a>1.1 深拷贝</h4><h4 id="1-2-浅拷贝"><a href="#1-2-浅拷贝" class="headerlink" title="1.2 浅拷贝"></a>1.2 浅拷贝</h4><h3 id="2-代码示例"><a href="#2-代码示例" class="headerlink" title="2. 代码示例"></a>2. 代码示例</h3><h4 id="2-1-common-io-BeanUtis"><a href="#2-1-common-io-BeanUtis" class="headerlink" title="2.1 common.io.BeanUtis"></a>2.1 <code>common.io.BeanUtis</code></h4><h4 id="2-2-org-springframework-beans-BeanUtils"><a href="#2-2-org-springframework-beans-BeanUtils" class="headerlink" title="2.2 org.springframework.beans.BeanUtils"></a>2.2 <code>org.springframework.beans.BeanUtils</code></h4><h4 id="2-3-Cglib-BeanCopier"><a href="#2-3-Cglib-BeanCopier" class="headerlink" title="2.3 Cglib BeanCopier"></a>2.3 <code>Cglib BeanCopier</code></h4><h3 id="3-性能分析"><a href="#3-性能分析" class="headerlink" title="3. 性能分析"></a>3. 性能分析</h3><h3 id="4-结论"><a href="#4-结论" class="headerlink" title="4. 结论"></a>4. 结论</h3>
+                <p>设计篇-冗余备份</p>
+<p>工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。</p>
+<p>比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升系统的高可用性，在取得成本投入与高可用保障的平衡前提下，尽可能的对最核心的系统依赖做多份冗余。我们在做日常需求中，为了满足功能的实现，往往会引入很多跨进程的外部依赖，每引入一个依赖就多一个故障点。</p>
+<p>一些特别重要的功能，比如像用户下单支付、淘宝交易，由于这些功能对系统的高可用性要求极高，满足可用性的收益远远大于做冗余备份所付出的成本。</p>
+<p><strong>最佳实践</strong></p>
+<p>对应用的外部依赖进行整理，依赖最小化，重要依赖组件（如 MQ）增加冗余备份机制。</p>
+
             </div>
             <hr>
 
@@ -550,7 +560,7 @@
                     </span>
                     <a href="http://flymoon.top" class="b-link-green">flymoon</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/06/19/dui-xiang-kao-bei/" class="b-link-green">对象拷贝</a>
+                    <a href="/2020/01/01/rong-yu-bei-fen/" class="b-link-green">MAVEN 操作相关</a>
                 </p>
             </div>
         </div>
@@ -575,6 +585,48 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2020/01/01/she-ji-pian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="软件设计">
+                        
+                        <span class="card-title">软件设计</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">设计是把一种设想通过合理的规划，周密的计划，通过各种感觉形式传达出来的过程。设计是将目标更好变现的过程。回到软件设计上来，就体现在如何将软件高度抽象，解耦以达到分而治之的过程。
+设计是如此重要，我们既要具备对事物的抽象，解耦能力，又要能够从</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-01-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            flymoon
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/设计/" target="_blank">
+                        <span class="chip bg-color">设计</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2019/07/12/readme/">
                     <div class="card-image">
                         
@@ -587,43 +639,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">mdrecord</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-12
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-user fa-fw"></i>
-                            flymoon
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/06/05/ri-qi-ge-shi-hua/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="日期格式化（YYYY/MM/dd）">
-                        
-                        <span class="card-title">日期格式化（YYYY/MM/dd）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：
-
-</div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-05
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-12
                             </span>
                         <span class="publish-author">
                             

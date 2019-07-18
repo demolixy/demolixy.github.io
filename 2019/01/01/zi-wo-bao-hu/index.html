@@ -4,29 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="flymoon">
-    <meta name="description" content="
-
-
-
-名称
-wiki
-
-
-
-
-服务框架
-HSF
-wiki
-
-
-应用框架
-Pandora Boot
-wiki
-
-
-
-">
+    <meta name="keywords" content="自我保护, flymoon">
+    <meta name="description" content="系统的处理能力都有一个上限，这个可能是受硬件能力限制，如其所在的服务器硬件性能，网络带宽能力；
+可能是受下游系统的能力限制，如后端连接的数据库并发能力；也可能是为了保护自己的核心功能。
+系统自保护是一个非常重要的功能，它可以防止单点问题扩大">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -34,7 +15,7 @@ wiki
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>flymoon</title>
+    <title>自我保护 | flymoon</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -278,13 +259,13 @@ wiki
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        
+                        自我保护
                     </div>
                 </div>
             </div>
@@ -393,9 +374,13 @@ wiki
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/设计/" target="_blank">
+                                <span class="chip bg-color">设计</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -406,7 +391,7 @@ wiki
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-05-10
+                    2019-01-01
                 </div>
 
                 
@@ -422,27 +407,17 @@ wiki
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <table>
-<thead>
-<tr>
-<th></th>
-<th>名称</th>
-<th>wiki</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>服务框架</td>
-<td>HSF</td>
-<td><a href="http://mw.alibaba-inc.com/products/hsf/_book/?spm=a1zco.detail-hsf.2853836.3.1c7c4ef0ZdudL9" target="_blank" rel="noopener">wiki</a></td>
-</tr>
-<tr>
-<td>应用框架</td>
-<td>Pandora Boot</td>
-<td><a href="http://mw.alibaba-inc.com/products/pandoraboot/_book/?spm=a1zco.detail-pandoraboot.2853836.2.cced41aduAjVNm" target="_blank" rel="noopener">wiki</a></td>
-</tr>
-</tbody>
-</table>
+                <p>系统的处理能力都有一个上限，这个可能是受硬件能力限制，如其所在的服务器硬件性能，网络带宽能力；</p>
+<p>可能是受下游系统的能力限制，如后端连接的数据库并发能力；也可能是为了保护自己的核心功能。</p>
+<p>系统自保护是一个非常重要的功能，它可以防止单点问题扩大化、瞬时问题长尾化，以及非关键问题灾难化。</p>
+<p>业务系统调用各种其他系统时应该有面向失败的设计，不要无条件的相信其他系统，设计一套自己的容错方案。系统设计的一个重要原则是认为所有的依赖都是不靠谱的，基于此原则做依赖管理。</p>
+<p>【最佳实践】</p>
+<ol>
+<li>通过 TCP 滑动窗口和拥塞控制等机制来缓解请求拥塞的情况。</li>
+<li>服务端要借助限流组件，合理地配置限流规则，来应对突发的大流量，防止被流量洪峰打垮。</li>
+<li>客户端对不稳定或超长时间的调用进行自动熔断，配置合理的超时时间，防止被不稳定下游服务阻塞而导致级联失败。</li>
+<li>限流是为了减少业务流量，降低系统压力。限流的处理逻辑应简单快速，不应加剧系统开销</li>
+</ol>
 
             </div>
             <hr>
@@ -590,7 +565,7 @@ wiki
                     </span>
                     <a href="http://flymoon.top" class="b-link-green">flymoon</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/05/10/wei-ming-ming/" class="b-link-green"></a>
+                    <a href="/2019/01/01/zi-wo-bao-hu/" class="b-link-green">自我保护</a>
                 </p>
             </div>
         </div>
@@ -615,22 +590,20 @@ wiki
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/06/05/ri-qi-ge-shi-hua/">
+                <a href="/2019/01/01/ou-he-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="日期格式化（YYYY/MM/dd）">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="耦合性">
                         
-                        <span class="card-title">日期格式化（YYYY/MM/dd）</span>
+                        <span class="card-title">耦合性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary block-with-text">日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：
-
-</div>
+                    <div class="summary block-with-text">耦合性是一种软件度量，是指一程序中，模块及模块之间信息或参数依赖的程度。内聚性是一个和耦合性相对的概念，一般而言低耦合性代表高内聚性，反之亦然。低耦合性是结构良好程序的特性，低耦合性程序的可读性及可维护性会比较好。 松散耦合是指二个彼此相关</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-05
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-01
                         </span>
                         <span class="publish-author">
                             
@@ -639,6 +612,14 @@ wiki
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/设计/" target="_blank">
+                        <span class="chip bg-color">设计</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -650,23 +631,26 @@ wiki
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/05/09/traceid-sheng-cheng-gui-ze/">
+                <a href="/2018/01/01/maven/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="TraceId 生成规则">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="MAVEN 操作相关">
                         
-                        <span class="card-title">TraceId 生成规则</span>
+                        <span class="card-title">MAVEN 操作相关</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary block-with-text">[TOC]
-1. 背景介绍在常用的日志系统中，都会生成一个唯一的标识，来标明本次请求的ID，所有具有一个实际业务含义的标识比UUID更加的具有可读性。
-2. 实现说明aaaaaaaatttttttttttttccccfpppp
-TraceI</div>
+                    <div class="summary block-with-text">mvn简单说明
+本地仓库
+maven私服仓库
+
+1. mvn install将编译打包之后的jar，部署到本地maven仓库    
+2. mvn package只是打包部署到target下面，没有部署的本地的maven仓库
+3. mvn </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-09
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-01-01
                             </span>
                         <span class="publish-author">
                             
@@ -675,6 +659,14 @@ TraceI</div>
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MAVEN/" target="_blank">
+                        <span class="chip bg-color">MAVEN</span>
+                    </a>
+                    
                 </div>
                 
             </div>

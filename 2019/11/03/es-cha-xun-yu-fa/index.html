@@ -94,18 +94,18 @@
   };
 </script>
 
-  <meta name="description" content="缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，  比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每">
-<meta name="keywords" content="设计">
+  <meta name="description" content="1234567891011121314151617181920&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123;    &amp;quot;bool&amp;quot;: &amp;#123;      &amp;quot;must&amp;quot;: [        &amp;#123;          &amp;quot;term&amp;quot;: &amp;#123;            &amp;quot;global_id&amp;quot;:">
+<meta name="keywords" content="ES">
 <meta property="og:type" content="article">
-<meta property="og:title" content="缓存设计">
-<meta property="og:url" content="http://flymoon.top/2020/01/01/huan-cun-pian/index.html">
+<meta property="og:title" content="ES查询语法">
+<meta property="og:url" content="http://flymoon.top/2019/11/03/es-cha-xun-yu-fa/index.html">
 <meta property="og:site_name" content="flymoon">
-<meta property="og:description" content="缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，  比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每">
+<meta property="og:description" content="1234567891011121314151617181920&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123;    &amp;quot;bool&amp;quot;: &amp;#123;      &amp;quot;must&amp;quot;: [        &amp;#123;          &amp;quot;term&amp;quot;: &amp;#123;            &amp;quot;global_id&amp;quot;:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-15T02:53:52.947Z">
+<meta property="og:updated_time" content="2019-11-05T07:40:36.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存设计">
-<meta name="twitter:description" content="缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，  比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每">
+<meta name="twitter:title" content="ES查询语法">
+<meta name="twitter:description" content="1234567891011121314151617181920&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123;    &amp;quot;bool&amp;quot;: &amp;#123;      &amp;quot;must&amp;quot;: [        &amp;#123;          &amp;quot;term&amp;quot;: &amp;#123;            &amp;quot;global_id&amp;quot;:">
 
 
 
@@ -113,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="http://flymoon.top/2020/01/01/huan-cun-pian/">
+  <link rel="canonical" href="http://flymoon.top/2019/11/03/es-cha-xun-yu-fa/">
 
 
 
@@ -124,7 +124,7 @@
 </script>
 
   
-  <title>缓存设计 | flymoon</title>
+  <title>ES查询语法 | flymoon</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2020/01/01/huan-cun-pian/">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/11/03/es-cha-xun-yu-fa/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="flymoon">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">缓存设计
+          <h1 class="post-title" itemprop="name headline">ES查询语法
 
               
             
@@ -330,7 +330,7 @@
                 
               
 
-              <time title="创建时间：2020-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00+08:00">2020-01-01</time>
+              <time title="创建时间：2019-11-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-03T00:00:00+08:00">2019-11-03</time>
             </span>
           
 
@@ -345,7 +345,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-15 10:53:52" itemprop="dateModified" datetime="2019-07-15T10:53:52+08:00">2019-07-15</time>
+                <time title="修改时间：2019-11-05 15:40:36" itemprop="dateModified" datetime="2019-11-05T15:40:36+08:00">2019-11-05</time>
               </span>
             
           
@@ -384,22 +384,7 @@
       
 
       
-        <p>缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，</p>
-<blockquote>
-<p>比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每次又都不会进行缓存。假如有恶意攻击，就可以利用这个漏洞，对DB造成压力，甚至压垮DB。缓存设计时，应考虑缓存穿透保护，即针对缓存穿透问题采取有效措施，防止大量请求穿透缓存访问 DB 导致 DB 挂掉。</p>
-</blockquote>
-<p>【最佳实践】</p>
-<ol>
-<li><p>一般缓存使用，先进行缓存查询，如果 key 不存在或者 key 已经过期，再从 DB 进行查询，并把查询到的对象放进缓存；</p>
-<blockquote>
-<p>如果 DB 查询对象为空，也将空值写进缓存，只是设定的缓存过期时间较短，比如设置为 60 秒。当有新 key 产生的时候，对缓存进行清理。倘若请求为空的情况太多，导致缓存空数据占用内存空间太大，推荐使用布隆过滤器。即创建一个足够大的 bitmap，用于存储可能访问的 key，不存在的 key 直接被过滤。通过一致性 hash 来进行热点散列。</p>
-</blockquote>
-</li>
-<li><p>业务代码中，缓存层统一添加在数据层上，服务层下，禁止出现嵌套调用。</p>
-</li>
-<li>构建数据发生异常时，错误数据不放入缓存。</li>
-<li>在任何需要远程调用的逻辑，都应该有恰当的缓存策略，特别是元数据的场景。</li>
-</ol>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">          &quot;term&quot;: &#123;</span><br><span class="line">            &quot;global_id&quot;: &#123;</span><br><span class="line">              &quot;value&quot;: &quot;4329543139&quot;,</span><br><span class="line">              &quot;boost&quot;: 1.0</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;disable_coord&quot;: false,</span><br><span class="line">      &quot;adjust_pure_negative&quot;: true,</span><br><span class="line">      &quot;boost&quot;: 1.0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -430,7 +415,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/设计/" rel="tag"># 设计</a>
+            <a href="/tags/ES/" rel="tag"># ES</a>
           
         </div>
       
@@ -443,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/01/shu-ju-ku-suo-yin-she-ji/" rel="next" title="数据库索引">
-                <i class="fa fa-chevron-left"></i> 数据库索引
+              <a href="/2019/10/11/wei-ming-ming/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -537,7 +522,9 @@
         
           
         
-        <span class="site-state-item-count">3</span>
+          
+        
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

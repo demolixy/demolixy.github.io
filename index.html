@@ -286,6 +286,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2020/01/01/huan-cun-pian/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/01/huan-cun-pian/" class="post-title-link" itemprop="url">缓存设计</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00+08:00">2020-01-01</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-15 10:53:52" itemprop="dateModified" datetime="2019-07-15T10:53:52+08:00">2019-07-15</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，</p>
+<blockquote>
+<p>比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每次又都不会进行缓存。假如有恶意攻击，就可以利用这个漏洞，对DB造成压力，甚至压垮DB。缓存设计时，应考虑缓存穿透保护，即针对缓存穿透问题采取有效措施，防止大量请求穿透缓存访问 DB 导致 DB 挂掉。</p>
+</blockquote>
+<p>【最佳实践】</p>
+<ol>
+<li><p>一般缓存使用，先进行缓存查询，如果 key 不存在或者 key 已经过期，再从 DB 进行查询，并把查询到的对象放进缓存；</p>
+<blockquote>
+<p>如果 DB 查询对象为空，也将空值写进缓存，只是设定的缓存过期时间较短，比如设置为 60 秒。当有新 key 产生的时候，对缓存进行清理。倘若请求为空的情况太多，导致缓存空数据占用内存空间太大，推荐使用布隆过滤器。即创建一个足够大的 bitmap，用于存储可能访问的 key，不存在的 key 直接被过滤。通过一致性 hash 来进行热点散列。</p>
+</blockquote>
+</li>
+<li><p>业务代码中，缓存层统一添加在数据层上，服务层下，禁止出现嵌套调用。</p>
+</li>
+<li>构建数据发生异常时，错误数据不放入缓存。</li>
+<li>在任何需要远程调用的逻辑，都应该有恰当的缓存策略，特别是元数据的场景。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://flymoon.top/2020/01/01/shu-ju-ku-suo-yin-she-ji/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -465,346 +640,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2020/01/01/rong-yu-bei-fen/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/01/01/rong-yu-bei-fen/" class="post-title-link" itemprop="url">冗余备份相关</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00+08:00">2020-01-01</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-31 14:52:55" itemprop="dateModified" datetime="2019-07-31T14:52:55+08:00">2019-07-31</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>设计篇-冗余备份</p>
-<p>工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。</p>
-<p>比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升系统的高可用性，在取得成本投入与高可用保障的平衡前提下，尽可能的对最核心的系统依赖做多份冗余。我们在做日常需求中，为了满足功能的实现，往往会引入很多跨进程的外部依赖，每引入一个依赖就多一个故障点。</p>
-<p>一些特别重要的功能，比如像用户下单支付、淘宝交易，由于这些功能对系统的高可用性要求极高，满足可用性的收益远远大于做冗余备份所付出的成本。</p>
-<p><strong>最佳实践</strong></p>
-<p>对应用的外部依赖进行整理，依赖最小化，重要依赖组件（如 MQ）增加冗余备份机制。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2020/01/01/huan-cun-pian/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/01/01/huan-cun-pian/" class="post-title-link" itemprop="url">缓存设计</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-01-01T00:00:00+08:00">2020-01-01</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-15 10:53:52" itemprop="dateModified" datetime="2019-07-15T10:53:52+08:00">2019-07-15</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，</p>
-<blockquote>
-<p>比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每次又都不会进行缓存。假如有恶意攻击，就可以利用这个漏洞，对DB造成压力，甚至压垮DB。缓存设计时，应考虑缓存穿透保护，即针对缓存穿透问题采取有效措施，防止大量请求穿透缓存访问 DB 导致 DB 挂掉。</p>
-</blockquote>
-<p>【最佳实践】</p>
-<ol>
-<li><p>一般缓存使用，先进行缓存查询，如果 key 不存在或者 key 已经过期，再从 DB 进行查询，并把查询到的对象放进缓存；</p>
-<blockquote>
-<p>如果 DB 查询对象为空，也将空值写进缓存，只是设定的缓存过期时间较短，比如设置为 60 秒。当有新 key 产生的时候，对缓存进行清理。倘若请求为空的情况太多，导致缓存空数据占用内存空间太大，推荐使用布隆过滤器。即创建一个足够大的 bitmap，用于存储可能访问的 key，不存在的 key 直接被过滤。通过一致性 hash 来进行热点散列。</p>
-</blockquote>
-</li>
-<li><p>业务代码中，缓存层统一添加在数据层上，服务层下，禁止出现嵌套调用。</p>
-</li>
-<li>构建数据发生异常时，错误数据不放入缓存。</li>
-<li>在任何需要远程调用的逻辑，都应该有恰当的缓存策略，特别是元数据的场景。</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://flymoon.top/2020/01/01/she-ji-pian/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -920,6 +755,952 @@
 <li>监控设计 关键监控项及SLA的指标必须要做监控，监控项尽可能覆盖全，同时要做到有效报警，不要让大量无效报警淹没有价值的报警信息。</li>
 <li>权限设计 本着够用原则，避免出现大权限，大账号，如果避免不了，需要做天花板限制。<br>表结构设计 分库分表需要考虑热点数据问题，时刻关注表的数据量大小</li>
 </ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/10/11/wei-ming-ming/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/11/wei-ming-ming/" class="post-title-link" itemprop="url">未命名</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-11 17:30:55" itemprop="dateCreated datePublished" datetime="2019-10-11T17:30:55+08:00">2019-10-11</time>
+            </span>
+          
+
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>napos权限<code>https://wiki.ele.to:8090/pages/viewpage.action?pageId=152042362</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/09/02/bigdecimal-shi-yong/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/02/bigdecimal-shi-yong/" class="post-title-link" itemprop="url">BigDecimal使用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-02 14:29:12 / 修改时间：14:40:55" itemprop="dateCreated datePublished" datetime="2019-09-02T14:29:12+08:00">2019-09-02</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ol>
+<li>向上取整</li>
+<li>向下取整</li>
+<li>四舍五入</li>
+</ol>
+<h3 id="API说明"><a href="#API说明" class="headerlink" title="API说明"></a>API说明</h3><ol>
+<li>RoundingMode.CEILING：取右边最近的整数</li>
+<li>RoundingMode.DOWN：去掉小数部分取整，也就是正数取左边，负数取右边，相当于向原点靠近的方向取整</li>
+<li>RoundingMode.FLOOR：取左边最近的正数</li>
+<li>RoundingMode.HALF_DOWN:五舍六入，负数先取绝对值再五舍六入再负数</li>
+<li>RoundingMode.HALF_UP:四舍五入，负数原理同上</li>
+<li>RoundingMode.HALF_EVEN:这个比较绕，整数位若是奇数则四舍五入，若是偶数则五舍六入</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/08/26/es-cha-xun-yu-fa/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/26/es-cha-xun-yu-fa/" class="post-title-link" itemprop="url">ES查询语法</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-26 11:49:39" itemprop="dateCreated datePublished" datetime="2019-08-26T11:49:39+08:00">2019-08-26</time>
+            </span>
+          
+
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">          &quot;term&quot;: &#123;</span><br><span class="line">            &quot;global_id&quot;: &#123;</span><br><span class="line">              &quot;value&quot;: &quot;4329543139&quot;,</span><br><span class="line">              &quot;boost&quot;: 1.0</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;disable_coord&quot;: false,</span><br><span class="line">      &quot;adjust_pure_negative&quot;: true,</span><br><span class="line">      &quot;boost&quot;: 1.0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/08/15/optional-yong-fa/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/15/optional-yong-fa/" class="post-title-link" itemprop="url">OPTIONAL</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-15 14:29:53 / 修改时间：14:30:24" itemprop="dateCreated datePublished" datetime="2019-08-15T14:29:53+08:00">2019-08-15</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>OPTIONAL 的用法</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/08/01/rong-yu-bei-fen/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/01/rong-yu-bei-fen/" class="post-title-link" itemprop="url">冗余备份相关</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-01T00:00:00+08:00">2019-08-01</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-05 15:30:33" itemprop="dateModified" datetime="2019-11-05T15:30:33+08:00">2019-11-05</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>设计篇-冗余备份</p>
+<p>工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。</p>
+<p>比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升系统的高可用性，在取得成本投入与高可用保障的平衡前提下，尽可能的对最核心的系统依赖做多份冗余。我们在做日常需求中，为了满足功能的实现，往往会引入很多跨进程的外部依赖，每引入一个依赖就多一个故障点。</p>
+<p>一些特别重要的功能，比如像用户下单支付、淘宝交易，由于这些功能对系统的高可用性要求极高，满足可用性的收益远远大于做冗余备份所付出的成本。</p>
+<p><strong>最佳实践</strong></p>
+<p>对应用的外部依赖进行整理，依赖最小化，重要依赖组件（如 MQ）增加冗余备份机制。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/08/01/json-zhuan-hua-map/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flymoon">
+      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="flymoon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/01/json-zhuan-hua-map/" class="post-title-link" itemprop="url">json 转化Map</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-01T00:00:00+08:00">2019-08-01</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-05 15:30:53" itemprop="dateModified" datetime="2019-11-05T15:30:53+08:00">2019-11-05</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="json-转化Map"><a href="#json-转化Map" class="headerlink" title="json 转化Map"></a>json 转化Map</h3><ul>
+<li>正常的fastjson和sf.json是无法的几行代码之内将json转化成Map</li>
+<li>当时Gson就可以满足当前的需求</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class Test &#123;</span><br><span class="line">    </span><br><span class="line">    private String id;</span><br><span class="line">    </span><br><span class="line">    private String name;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class GsonTest &#123;</span><br><span class="line">    </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ...</span><br><span class="line">        Map&lt;String, List&lt;Test&gt;&gt; testMap = new HashMap&lt;&gt;();</span><br><span class="line">        // 装Map</span><br><span class="line">        String testMapJsonStr = &quot;&quot;;</span><br><span class="line">        </span><br><span class="line">        // 利用Gson 转化Map</span><br><span class="line">        Gson gson = new Gson();</span><br><span class="line">        Map&lt;String, List&lt;Test&gt;&gt; newTestMap = gson.fromJson(dzdmJson, new TypeToken&lt;Map&lt;String, List&lt;Test&gt;&gt;&gt;()&#123;&#125;.getType());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static final &lt;T&gt; T toObject(String jsonString, TypeReference&lt;T&gt; type) &#123;</span><br><span class="line">    return JSON.parseObject(jsonString, type);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2018-0127-补充"><a href="#2-2018-0127-补充" class="headerlink" title="2 2018 0127 补充"></a>2 2018 0127 补充</h3><ul>
+<li><p>在使用Gson的时候，发现不能格式化带有int的json字符串。报错如下：<br><img src="https://note.youdao.com/yws/public/resource/7fc235c525305c0a08973cbf52212bc5/xmlnote/B2FA8FC518424E2AAAEAFF0E730B5B26/6692" alt="image"></p>
+</li>
+<li><p>示例json</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">3: &#123;</span><br><span class="line">  &quot;id&quot;: 3,</span><br><span class="line">  &quot;name&quot;: &quot;背叛国家罪&quot;,</span><br><span class="line">  &quot;open&quot;: false,</span><br><span class="line">  &quot;pId&quot;: 2,</span><br><span class="line">  &quot;title&quot;: &quot;背叛国家罪&quot;</span><br><span class="line">&#125;,</span><br><span class="line">4: &#123;</span><br><span class="line">  &quot;id&quot;: 4,</span><br><span class="line">  &quot;name&quot;: &quot;分裂国家罪&quot;,</span><br><span class="line">  &quot;open&quot;: false,</span><br><span class="line">  &quot;pId&quot;: 2,</span><br><span class="line">  &quot;title&quot;: &quot;分裂国家罪&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方案</p>
+<blockquote>
+<p>使用fastjson的类库进行格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parseObject(str, new TypeReference&lt;Map&lt;Integer, Bean&gt;&gt;()&#123;&#125;);</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
 
           
         
@@ -1426,792 +2207,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/06/19/dui-xiang-kao-bei/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/19/dui-xiang-kao-bei/" class="post-title-link" itemprop="url">对象拷贝</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-19 18:11:22 / 修改时间：18:16:51" itemprop="dateCreated datePublished" datetime="2019-06-19T18:11:22+08:00">2019-06-19</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h3 id="1-拷贝方式"><a href="#1-拷贝方式" class="headerlink" title="1. 拷贝方式"></a>1. 拷贝方式</h3><h4 id="1-1-深拷贝"><a href="#1-1-深拷贝" class="headerlink" title="1.1 深拷贝"></a>1.1 深拷贝</h4><h4 id="1-2-浅拷贝"><a href="#1-2-浅拷贝" class="headerlink" title="1.2 浅拷贝"></a>1.2 浅拷贝</h4><h3 id="2-代码示例"><a href="#2-代码示例" class="headerlink" title="2. 代码示例"></a>2. 代码示例</h3><h4 id="2-1-common-io-BeanUtis"><a href="#2-1-common-io-BeanUtis" class="headerlink" title="2.1 common.io.BeanUtis"></a>2.1 <code>common.io.BeanUtis</code></h4><h4 id="2-2-org-springframework-beans-BeanUtils"><a href="#2-2-org-springframework-beans-BeanUtils" class="headerlink" title="2.2 org.springframework.beans.BeanUtils"></a>2.2 <code>org.springframework.beans.BeanUtils</code></h4><h4 id="2-3-Cglib-BeanCopier"><a href="#2-3-Cglib-BeanCopier" class="headerlink" title="2.3 Cglib BeanCopier"></a>2.3 <code>Cglib BeanCopier</code></h4><h3 id="3-性能分析"><a href="#3-性能分析" class="headerlink" title="3. 性能分析"></a>3. 性能分析</h3><h3 id="4-结论"><a href="#4-结论" class="headerlink" title="4. 结论"></a>4. 结论</h3>
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/06/05/ri-qi-ge-shi-hua/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/05/ri-qi-ge-shi-hua/" class="post-title-link" itemprop="url">日期格式化（YYYY/MM/dd）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-05 16:41:06" itemprop="dateCreated datePublished" datetime="2019-06-05T16:41:06+08:00">2019-06-05</time>
-            </span>
-          
-
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>日期格式化时，yyyy表示当天所在的年，而大写的YYYY代表是week in which year（JDK7之后引入的概念），意思是当天所在的周属于的年份，一周从周日开始，周六结束，只要本周跨年，返回的YYYY就是下一年。另外需要注意：</p>
-<ul>
-<li>表示月份是大写的M；</li>
-<li>表示分钟则是小写的m；</li>
-<li>24小时制的是大写的H；</li>
-<li>12小时制的则是小写的h。</li>
-</ul>
-<p>正例：表示日期和时间的格式如下所示：<br> new SimpleDateFormat(“yyyy-MM-dd HH:mm:ss”);</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/05/09/traceid-sheng-cheng-gui-ze/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/09/traceid-sheng-cheng-gui-ze/" class="post-title-link" itemprop="url">TraceId 生成规则</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-09 17:52:33 / 修改时间：17:58:01" itemprop="dateCreated datePublished" datetime="2019-05-09T17:52:33+08:00">2019-05-09</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[TOC]</p>
-<h3 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1. 背景介绍"></a>1. 背景介绍</h3><p>在常用的日志系统中，都会生成一个唯一的标识，来标明本次请求的ID，所有具有一个实际业务含义的标识比UUID更加的具有可读性。</p>
-<h3 id="2-实现说明"><a href="#2-实现说明" class="headerlink" title="2. 实现说明"></a>2. 实现说明</h3><p><strong><em>aaaaaaaatttttttttttttccccfpppp</em></strong></p>
-<p>TraceId的a段是8个字符的IP地址（IPv4的每个段用两位16进制数表示），t段是13个字符的生成TraceId的毫秒时间，c段是4位（1000-9999）的整数递增量。对于线上环境，a段IP地址使用的最前端负责生成TraceId的那台服务器的IP，使用a、t、c三段能从TraceId直接得到机器IP和生成时间，能够满足直接根据机器IP 扫描检索TraceId的需求；时间也有助于TraceId的分布足够分散的同时又可以按时间进行存储分区。c段的4位顺序数用于避免多线程并发时TraceId碰撞（可以保证在qps=9000000以下不碰撞）。a、t、c三段的TraceId是现在用的最多的方案，但这个方案并不完美，如果同一台机器上同时部署多个应用，就很容易出现TraceId碰撞的情况，为了支持多JVM实例环境，最新版的 TraceId 末尾又增加了一个扩展字符 f （一般用于排查问题，例如f 段是字符e，表示由nginx模块生成的TraceId）和进程号p段（用四位16进制数表示）。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/03/29/ha-xi-biao/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/29/ha-xi-biao/" class="post-title-link" itemprop="url">哈希表</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-29 01:33:48 / 修改时间：01:42:38" itemprop="dateCreated datePublished" datetime="2019-03-29T01:33:48+08:00">2019-03-29</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>根据键<code>key</code>而直接访问内存存储位置的数据结构，它通过计算一个关于键值的函数，将所需要查询的数据映射到表中一个位置来访问记录。可以加快查找的速度。这个映射函数称做散列函数，存放记录的数组称做散列表</p>
-<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><h3 id="2-构造散列函数"><a href="#2-构造散列函数" class="headerlink" title="2.构造散列函数"></a>2.构造散列函数</h3><pre><code>· 直接地址法
-· 数字分析法
-· 平方取中法
-· 折叠法
-· 除留余数法
-</code></pre>
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://flymoon.top/2019/03/20/xiang-xia-zhuan-xing-he-zi-dong-bao-zhuang/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="flymoon">
-      <meta itemprop="description" content="总有一天，那些让你难过的事情，你都能笑着说出来。">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="flymoon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/xiang-xia-zhuan-xing-he-zi-dong-bao-zhuang/" class="post-title-link" itemprop="url">向下转型和自动包装</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-20 17:11:33" itemprop="dateCreated datePublished" datetime="2019-03-20T17:11:33+08:00">2019-03-20</time>
-            </span>
-          
-
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="问题说明"><a href="#问题说明" class="headerlink" title="问题说明"></a>问题说明</h3><p>在debug的时候遇到一个傻逼的问题，排查很长时间没有找到具体的原因。最后发现使用<strong>判等2</strong>这种方式进行判断的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean testNumEquals() &#123;</span><br><span class="line">    Long num1 = 0L;</span><br><span class="line">    int num = 0;</span><br><span class="line">    // 判等1</span><br><span class="line">    System.out.println(num == num1);</span><br><span class="line">    // 判等2</span><br><span class="line">    System.out.printlb(num1.equals(0));</span><br><span class="line">    // 判等3</span><br><span class="line">    System.out.println(num1.equals(0L));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">true;</span><br><span class="line">false;</span><br><span class="line">true;</span><br></pre></td></tr></table></figure></p>
-<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>在分析之前需要说明几个关键的名字<strong>自动拆箱，自动装箱，隐式类型转化</strong> 进行说明。</p>
-<ul>
-<li><p>自动装箱：</p>
-<blockquote>
-<p>将基本类型转化为该基本类型的实际包装类</p>
-</blockquote>
-<blockquote>
-<p>eg: int –&gt; Integer</p>
-</blockquote>
-</li>
-<li>自动拆箱<blockquote>
-<p>将包装类型转化为该包装类的基本类型</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static void test() &#123;</span><br><span class="line">    int a = 1;</span><br><span class="line">    Integer a1 = new Intger(1);</span><br><span class="line">    System.out.println(a == a1);</span><br><span class="line">    System.out.println(a1.equals(a));</span><br><span class="line">&#125;</span><br><span class="line">out:</span><br><span class="line">true;</span><br><span class="line">true;</span><br></pre></td></tr></table></figure>
-<h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><ol>
-<li>进行<code>==</code> 操作的时候，会对Intger进行自动拆箱的操作，使用<code>Integer.equals(int)</code>进行比较的时候,会对<code>int</code>进行自动装箱的操作。</li>
-<li>对于两个非new生成的Integer对象，进行比较时，如果两个变量的值在区间-128到127之间</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static Integer valueOf(int i) &#123;</span><br><span class="line">    if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">        return IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">    return new Integer(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>对于<code>Integer i = 100;</code>的操作等同于<code>Ineger i = Integer.valueof(100)</code>;</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2254,7 +2254,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2277,7 +2277,9 @@
         
           
         
-        <span class="site-state-item-count">2</span>
+          
+        
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

@@ -4,49 +4,30 @@
   
     
     <entry>
-      <title>数据库索引</title>
-      <link href="/2020/01/01/shu-ju-ku-suo-yin-she-ji/"/>
-      <url>/2020/01/01/shu-ju-ku-suo-yin-she-ji/</url>
-      
-        <content type="html"><![CDATA[<p>在数据库设计中，索引是必不可少的。合理的索引设计可以提升查询的效率。在设计数据库索引的时候需要注意以下几点误区：</p><p>很多研发同学评估表数据量不是很大，比如就几千或几万行，如此小表查询不会导致性能问题，因此就不需要添加索引了。</p><p>如果数据库就几条这样的并发查询语句，那么大家的想法也没错，但是线上的情况异常复杂，往往评估非常不准确，或对异常情况考虑不足，并发查询量超出预期，业务接口超时报错导致故障。表数据量虽然不多，只有几千或几万行，但大并发下的全面扫描会导致系统CPU资源耗尽，资源争抢导致SQL执行时间变长，进而导致数据库资源池被占满，业务请求因获取连接超时失败而出现了雪崩。</p><p>因业务需求的调整，反应到数据库上可能就是一些查询条件的改变，需要对索引进行调整，有的同学选择了先删掉旧索引然后再创建新索引的方式。这种独立拆分方式的索引变更不具备原子性，在旧索引被删除后新索引建立前这期间，如果线上的查询刚好依赖这个旧索引，之前索引扫描的高效查询变成了全表扫描的低效查询，可能导致系统CPU资源耗尽，数据库资源池被占满，进而业务查询超时导致故障。</p><p>当 MySQL 中建立的联合索引， 只要索引中的某一列的值为空时(NULL)，即便其他的字段完全相同，也不会引起唯一索引冲突,导致唯一约束失效，执行 insert 操作时，即使已经有了该数据，仍然会插入成功。MySQL 官方文档解释只有 BDB 类型的存储引擎支持包含 NULL values 的唯一约束，所以在其他引擎上这种情况发生的时候很容易导致数据冲突。</p><p>【最佳实践】<br>建议无论表的大小，都根据业务查询需求添加合适的索引，避免全表扫描；同时不滥用索引。</p><p>选择区分度高的字段建立索引。</p><p>多字段and查询时，根据业务查询特点和数据分布评估后需创建联合索引，则需满足最左前缀原则，同时区分度相对高的字段放在联合索引前面。</p><p><strong>创建索引，推荐的原则：</strong></p><ol><li>能用单索引，不用联合索引；</li><li>能用窄索引，不用宽索引。</li><li>避免重复建索引，尽量复用已有索引，提高索引使用率。</li><li>尽量使用覆盖索引，无需回表查询，避免随机IO。</li></ol><p>满足一定条件后，建议尽量使用前缀索引，用列的前缀代替整个列作为索引key。当前缀长度合适时，可以做到既使得前缀索引的选择性接近全列索引，同时因为索引key变短而减少了索引文件的大小和维护开销。</p><p>Join查询中连接字段建立索引，避免全表扫描。</p><p>对于范围，&lt;&gt;等非等值查询，只能利用索引的最左列，需要根据实际业务调整规避。</p><p>order/group by等语句的字段，适当添加索引可避免排序，如果是多列排序，需要所有列排序方向一致，才能利用索引。<br>建议给要加唯一索引的属性加一个非空限制或者提供默认值。</p><p>索引调整需要仔细评估，特别是删除索引这种会改变 SQL 执行计划的操作，对于索引的重建一定确保drop与add通过一条alter语句执行，删除旧索引并添加新索引，会自动完成转换。对于唯一索引调整，建议删掉唯一键约束但保留索引，做法就是drop唯一索引的同时add一个相同结构的普通索引，且drop和add通过一条alter语句执行，这样确保调整过程中及之后对SQL查询性能无影响。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 设计 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>冗余备份相关</title>
-      <link href="/2020/01/01/rong-yu-bei-fen/"/>
-      <url>/2020/01/01/rong-yu-bei-fen/</url>
-      
-        <content type="html"><![CDATA[<p>设计篇-冗余备份</p><p>工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。</p><p>比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升系统的高可用性，在取得成本投入与高可用保障的平衡前提下，尽可能的对最核心的系统依赖做多份冗余。我们在做日常需求中，为了满足功能的实现，往往会引入很多跨进程的外部依赖，每引入一个依赖就多一个故障点。</p><p>一些特别重要的功能，比如像用户下单支付、淘宝交易，由于这些功能对系统的高可用性要求极高，满足可用性的收益远远大于做冗余备份所付出的成本。</p><p><strong>最佳实践</strong></p><p>对应用的外部依赖进行整理，依赖最小化，重要依赖组件（如 MQ）增加冗余备份机制。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 设计 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>缓存设计</title>
       <link href="/2020/01/01/huan-cun-pian/"/>
       <url>/2020/01/01/huan-cun-pian/</url>
       
         <content type="html"><![CDATA[<p>缓存是系统设计中必不可少的一环，但很多时候缓存设计不当可能会导致一些问题，</p><blockquote><p>比如：缓存穿透，是指每次查询，都走了从缓存，再穿透到DB这个过程，原因一般是数据在DB中不存在。一般的缓存使用流程是，先进行缓存查询，如果key不存在或者key已经过期，再对DB进行查询，并把查询到的对象，放进缓存。如果DB查询对象为空，则不放进缓存。如果查询一定不存在的对象，就会每次都去查询 DB，而每次查询都是空，每次又都不会进行缓存。假如有恶意攻击，就可以利用这个漏洞，对DB造成压力，甚至压垮DB。缓存设计时，应考虑缓存穿透保护，即针对缓存穿透问题采取有效措施，防止大量请求穿透缓存访问 DB 导致 DB 挂掉。</p></blockquote><p>【最佳实践】</p><ol><li><p>一般缓存使用，先进行缓存查询，如果 key 不存在或者 key 已经过期，再从 DB 进行查询，并把查询到的对象放进缓存；</p><blockquote><p>如果 DB 查询对象为空，也将空值写进缓存，只是设定的缓存过期时间较短，比如设置为 60 秒。当有新 key 产生的时候，对缓存进行清理。倘若请求为空的情况太多，导致缓存空数据占用内存空间太大，推荐使用布隆过滤器。即创建一个足够大的 bitmap，用于存储可能访问的 key，不存在的 key 直接被过滤。通过一致性 hash 来进行热点散列。</p></blockquote></li><li><p>业务代码中，缓存层统一添加在数据层上，服务层下，禁止出现嵌套调用。</p></li><li>构建数据发生异常时，错误数据不放入缓存。</li><li>在任何需要远程调用的逻辑，都应该有恰当的缓存策略，特别是元数据的场景。</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据库索引</title>
+      <link href="/2020/01/01/shu-ju-ku-suo-yin-she-ji/"/>
+      <url>/2020/01/01/shu-ju-ku-suo-yin-she-ji/</url>
+      
+        <content type="html"><![CDATA[<p>在数据库设计中，索引是必不可少的。合理的索引设计可以提升查询的效率。在设计数据库索引的时候需要注意以下几点误区：</p><p>很多研发同学评估表数据量不是很大，比如就几千或几万行，如此小表查询不会导致性能问题，因此就不需要添加索引了。</p><p>如果数据库就几条这样的并发查询语句，那么大家的想法也没错，但是线上的情况异常复杂，往往评估非常不准确，或对异常情况考虑不足，并发查询量超出预期，业务接口超时报错导致故障。表数据量虽然不多，只有几千或几万行，但大并发下的全面扫描会导致系统CPU资源耗尽，资源争抢导致SQL执行时间变长，进而导致数据库资源池被占满，业务请求因获取连接超时失败而出现了雪崩。</p><p>因业务需求的调整，反应到数据库上可能就是一些查询条件的改变，需要对索引进行调整，有的同学选择了先删掉旧索引然后再创建新索引的方式。这种独立拆分方式的索引变更不具备原子性，在旧索引被删除后新索引建立前这期间，如果线上的查询刚好依赖这个旧索引，之前索引扫描的高效查询变成了全表扫描的低效查询，可能导致系统CPU资源耗尽，数据库资源池被占满，进而业务查询超时导致故障。</p><p>当 MySQL 中建立的联合索引， 只要索引中的某一列的值为空时(NULL)，即便其他的字段完全相同，也不会引起唯一索引冲突,导致唯一约束失效，执行 insert 操作时，即使已经有了该数据，仍然会插入成功。MySQL 官方文档解释只有 BDB 类型的存储引擎支持包含 NULL values 的唯一约束，所以在其他引擎上这种情况发生的时候很容易导致数据冲突。</p><p>【最佳实践】<br>建议无论表的大小，都根据业务查询需求添加合适的索引，避免全表扫描；同时不滥用索引。</p><p>选择区分度高的字段建立索引。</p><p>多字段and查询时，根据业务查询特点和数据分布评估后需创建联合索引，则需满足最左前缀原则，同时区分度相对高的字段放在联合索引前面。</p><p><strong>创建索引，推荐的原则：</strong></p><ol><li>能用单索引，不用联合索引；</li><li>能用窄索引，不用宽索引。</li><li>避免重复建索引，尽量复用已有索引，提高索引使用率。</li><li>尽量使用覆盖索引，无需回表查询，避免随机IO。</li></ol><p>满足一定条件后，建议尽量使用前缀索引，用列的前缀代替整个列作为索引key。当前缀长度合适时，可以做到既使得前缀索引的选择性接近全列索引，同时因为索引key变短而减少了索引文件的大小和维护开销。</p><p>Join查询中连接字段建立索引，避免全表扫描。</p><p>对于范围，&lt;&gt;等非等值查询，只能利用索引的最左列，需要根据实际业务调整规避。</p><p>order/group by等语句的字段，适当添加索引可避免排序，如果是多列排序，需要所有列排序方向一致，才能利用索引。<br>建议给要加唯一索引的属性加一个非空限制或者提供默认值。</p><p>索引调整需要仔细评估，特别是删除索引这种会改变 SQL 执行计划的操作，对于索引的重建一定确保drop与add通过一条alter语句执行，删除旧索引并添加新索引，会自动完成转换。对于唯一索引调整，建议删掉唯一键约束但保留索引，做法就是drop唯一索引的同时add一个相同结构的普通索引，且drop和add通过一条alter语句执行，这样确保调整过程中及之后对SQL查询性能无影响。</p>]]></content>
       
       
       
@@ -72,6 +53,96 @@
         <tags>
             
             <tag> 设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2019/10/11/wei-ming-ming/"/>
+      <url>/2019/10/11/wei-ming-ming/</url>
+      
+        <content type="html"><![CDATA[<p>napos权限<code>https://wiki.ele.to:8090/pages/viewpage.action?pageId=152042362</code></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>BigDecimal使用</title>
+      <link href="/2019/09/02/bigdecimal-shi-yong/"/>
+      <url>/2019/09/02/bigdecimal-shi-yong/</url>
+      
+        <content type="html"><![CDATA[<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ol><li>向上取整</li><li>向下取整</li><li>四舍五入</li></ol><h3 id="API说明"><a href="#API说明" class="headerlink" title="API说明"></a>API说明</h3><ol><li>RoundingMode.CEILING：取右边最近的整数</li><li>RoundingMode.DOWN：去掉小数部分取整，也就是正数取左边，负数取右边，相当于向原点靠近的方向取整</li><li>RoundingMode.FLOOR：取左边最近的正数</li><li>RoundingMode.HALF_DOWN:五舍六入，负数先取绝对值再五舍六入再负数</li><li>RoundingMode.HALF_UP:四舍五入，负数原理同上</li><li>RoundingMode.HALF_EVEN:这个比较绕，整数位若是奇数则四舍五入，若是偶数则五舍六入</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ES查询语法</title>
+      <link href="/2019/08/26/es-cha-xun-yu-fa/"/>
+      <url>/2019/08/26/es-cha-xun-yu-fa/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">          &quot;term&quot;: &#123;</span><br><span class="line">            &quot;global_id&quot;: &#123;</span><br><span class="line">              &quot;value&quot;: &quot;4329543139&quot;,</span><br><span class="line">              &quot;boost&quot;: 1.0</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;disable_coord&quot;: false,</span><br><span class="line">      &quot;adjust_pure_negative&quot;: true,</span><br><span class="line">      &quot;boost&quot;: 1.0</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OPTIONAL</title>
+      <link href="/2019/08/15/optional-yong-fa/"/>
+      <url>/2019/08/15/optional-yong-fa/</url>
+      
+        <content type="html"><![CDATA[<p>OPTIONAL 的用法</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>冗余备份相关</title>
+      <link href="/2019/08/01/rong-yu-bei-fen/"/>
+      <url>/2019/08/01/rong-yu-bei-fen/</url>
+      
+        <content type="html"><![CDATA[<p>设计篇-冗余备份</p><p>工程学里有一个叫冗余备份的模型，在工程领域，航空领域，计算机领域大规模的都有应用。</p><p>比如航空领域里民航飞机一定会是两个引擎， 两份操作系统。计算机领域里，我们的同城双机房，单元化异地多机房都是为了应对单点故障风险。为了提升系统的高可用性，在取得成本投入与高可用保障的平衡前提下，尽可能的对最核心的系统依赖做多份冗余。我们在做日常需求中，为了满足功能的实现，往往会引入很多跨进程的外部依赖，每引入一个依赖就多一个故障点。</p><p>一些特别重要的功能，比如像用户下单支付、淘宝交易，由于这些功能对系统的高可用性要求极高，满足可用性的收益远远大于做冗余备份所付出的成本。</p><p><strong>最佳实践</strong></p><p>对应用的外部依赖进行整理，依赖最小化，重要依赖组件（如 MQ）增加冗余备份机制。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>json 转化Map</title>
+      <link href="/2019/08/01/json-zhuan-hua-map/"/>
+      <url>/2019/08/01/json-zhuan-hua-map/</url>
+      
+        <content type="html"><![CDATA[<h3 id="json-转化Map"><a href="#json-转化Map" class="headerlink" title="json 转化Map"></a>json 转化Map</h3><ul><li>正常的fastjson和sf.json是无法的几行代码之内将json转化成Map</li><li>当时Gson就可以满足当前的需求</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class Test &#123;</span><br><span class="line">    </span><br><span class="line">    private String id;</span><br><span class="line">    </span><br><span class="line">    private String name;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class GsonTest &#123;</span><br><span class="line">    </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ...</span><br><span class="line">        Map&lt;String, List&lt;Test&gt;&gt; testMap = new HashMap&lt;&gt;();</span><br><span class="line">        // 装Map</span><br><span class="line">        String testMapJsonStr = &quot;&quot;;</span><br><span class="line">        </span><br><span class="line">        // 利用Gson 转化Map</span><br><span class="line">        Gson gson = new Gson();</span><br><span class="line">        Map&lt;String, List&lt;Test&gt;&gt; newTestMap = gson.fromJson(dzdmJson, new TypeToken&lt;Map&lt;String, List&lt;Test&gt;&gt;&gt;()&#123;&#125;.getType());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static final &lt;T&gt; T toObject(String jsonString, TypeReference&lt;T&gt; type) &#123;</span><br><span class="line">    return JSON.parseObject(jsonString, type);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="2-2018-0127-补充"><a href="#2-2018-0127-补充" class="headerlink" title="2 2018 0127 补充"></a>2 2018 0127 补充</h3><ul><li><p>在使用Gson的时候，发现不能格式化带有int的json字符串。报错如下：<br><img src="https://note.youdao.com/yws/public/resource/7fc235c525305c0a08973cbf52212bc5/xmlnote/B2FA8FC518424E2AAAEAFF0E730B5B26/6692" alt="image"></p></li><li><p>示例json</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">3: &#123;</span><br><span class="line">  &quot;id&quot;: 3,</span><br><span class="line">  &quot;name&quot;: &quot;背叛国家罪&quot;,</span><br><span class="line">  &quot;open&quot;: false,</span><br><span class="line">  &quot;pId&quot;: 2,</span><br><span class="line">  &quot;title&quot;: &quot;背叛国家罪&quot;</span><br><span class="line">&#125;,</span><br><span class="line">4: &#123;</span><br><span class="line">  &quot;id&quot;: 4,</span><br><span class="line">  &quot;name&quot;: &quot;分裂国家罪&quot;,</span><br><span class="line">  &quot;open&quot;: false,</span><br><span class="line">  &quot;pId&quot;: 2,</span><br><span class="line">  &quot;title&quot;: &quot;分裂国家罪&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li><li><p>解决方案</p><blockquote><p>使用fastjson的类库进行格式化</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parseObject(str, new TypeReference&lt;Map&lt;Integer, Bean&gt;&gt;()&#123;&#125;);</span><br></pre></td></tr></table></figure></blockquote></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> JAVA </tag>
             
         </tags>
       
@@ -274,11 +345,11 @@
     
     
     <entry>
-      <title>幂等性</title>
-      <link href="/2019/01/01/mi-deng-xing/"/>
-      <url>/2019/01/01/mi-deng-xing/</url>
+      <title>自我保护</title>
+      <link href="/2019/01/01/zi-wo-bao-hu/"/>
+      <url>/2019/01/01/zi-wo-bao-hu/</url>
       
-        <content type="html"><![CDATA[<p>幂等性是要求系统设计满足用户对于同一操作发起的多次请求，其结果必须保证一致性，不会因为多次点击或多次提交而产生副作用。</p><p>【最佳实践】</p><ol><li>对于同一次事务的多次重复操作，要确保操作的唯一性和结果输出的唯一性，对于写操作要防止重复提交。</li><li>对于同一任务节点的多次重复执行，要确保任务可正常重新初始化，保证任务可多次重跑且对结果无影响。</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>系统的处理能力都有一个上限，这个可能是受硬件能力限制，如其所在的服务器硬件性能，网络带宽能力；</p><p>可能是受下游系统的能力限制，如后端连接的数据库并发能力；也可能是为了保护自己的核心功能。</p><p>系统自保护是一个非常重要的功能，它可以防止单点问题扩大化、瞬时问题长尾化，以及非关键问题灾难化。</p><p>业务系统调用各种其他系统时应该有面向失败的设计，不要无条件的相信其他系统，设计一套自己的容错方案。系统设计的一个重要原则是认为所有的依赖都是不靠谱的，基于此原则做依赖管理。</p><p>【最佳实践】</p><ol><li>通过 TCP 滑动窗口和拥塞控制等机制来缓解请求拥塞的情况。</li><li>服务端要借助限流组件，合理地配置限流规则，来应对突发的大流量，防止被流量洪峰打垮。</li><li>客户端对不稳定或超长时间的调用进行自动熔断，配置合理的超时时间，防止被不稳定下游服务阻塞而导致级联失败。</li><li>限流是为了减少业务流量，降低系统压力。限流的处理逻辑应简单快速，不应加剧系统开销</li></ol>]]></content>
       
       
       
@@ -312,11 +383,11 @@
     
     
     <entry>
-      <title>自我保护</title>
-      <link href="/2019/01/01/zi-wo-bao-hu/"/>
-      <url>/2019/01/01/zi-wo-bao-hu/</url>
+      <title>幂等性</title>
+      <link href="/2019/01/01/mi-deng-xing/"/>
+      <url>/2019/01/01/mi-deng-xing/</url>
       
-        <content type="html"><![CDATA[<p>系统的处理能力都有一个上限，这个可能是受硬件能力限制，如其所在的服务器硬件性能，网络带宽能力；</p><p>可能是受下游系统的能力限制，如后端连接的数据库并发能力；也可能是为了保护自己的核心功能。</p><p>系统自保护是一个非常重要的功能，它可以防止单点问题扩大化、瞬时问题长尾化，以及非关键问题灾难化。</p><p>业务系统调用各种其他系统时应该有面向失败的设计，不要无条件的相信其他系统，设计一套自己的容错方案。系统设计的一个重要原则是认为所有的依赖都是不靠谱的，基于此原则做依赖管理。</p><p>【最佳实践】</p><ol><li>通过 TCP 滑动窗口和拥塞控制等机制来缓解请求拥塞的情况。</li><li>服务端要借助限流组件，合理地配置限流规则，来应对突发的大流量，防止被流量洪峰打垮。</li><li>客户端对不稳定或超长时间的调用进行自动熔断，配置合理的超时时间，防止被不稳定下游服务阻塞而导致级联失败。</li><li>限流是为了减少业务流量，降低系统压力。限流的处理逻辑应简单快速，不应加剧系统开销</li></ol>]]></content>
+        <content type="html"><![CDATA[<p>幂等性是要求系统设计满足用户对于同一操作发起的多次请求，其结果必须保证一致性，不会因为多次点击或多次提交而产生副作用。</p><p>【最佳实践】</p><ol><li>对于同一次事务的多次重复操作，要确保操作的唯一性和结果输出的唯一性，对于写操作要防止重复提交。</li><li>对于同一任务节点的多次重复执行，要确保任务可正常重新初始化，保证任务可多次重跑且对结果无影响。</li></ol>]]></content>
       
       
       

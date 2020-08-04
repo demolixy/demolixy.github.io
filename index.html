@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="demo">
+<h1>hehe</h1>
+<button type="button" onclick="loadDoc()">下一个</button>
+</div>
+<div>
+<img id="pic_test" src="/i/eg_tulip.jpg"  alt="上海鲜花港 - 郁金香" />
+</div>
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      parseResult(this.responseText);
+    }
+  };
+  xhttp.open("GET", "https://api.66mz8.com/api/rand.tbimg.php?format=json", true);
+  xhttp.send();
+}
+
+function parseResult(str) {
+	var obj1 = eval('('+str+')');
+	document.getElementById("pic_test").src = obj1.pic_url;
+}
+
+</script>
+
+</body>
+</html>
